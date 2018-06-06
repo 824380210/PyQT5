@@ -360,4 +360,4 @@ window = Window()
 sys.exit(App.exec())
 ```
 ### 注意初始化前要加入所有控件 
-
+### last update on 2018-06-06
