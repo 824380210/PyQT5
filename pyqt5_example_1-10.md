@@ -327,10 +327,7 @@ sys.exit(App.exec())
 
 ### 
 
-# 
-
-
-```
+#  介绍statusbar的用法，并改进了一些使用方法，参考AddMessage 
 
 ```
 import sys
@@ -363,5 +360,4 @@ window = Window()
 sys.exit(App.exec())
 ```
 ### 注意初始化前要加入所有控件 
-```
 
