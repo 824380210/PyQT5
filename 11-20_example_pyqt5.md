@@ -48,3 +48,48 @@ sys.exit(App.exec())
 ## 上面的例子中可以看到菜单可以6个菜单，且File菜单中有一个关联的actions
 ##  上面的例子中没有看到setStatusTip的作用，mouse在菜单上没有看到提示信息
 ##  update on 2016-06-06
+## 
+# 右键弹出式菜单，你可以定义菜单中不同的键执行不同的动作
+```
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QMenu,QMenuBar,QAction,QStatusBar
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "xxxx "
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def contextMenuEvent(self, event):
+
+        contextMenu = QMenu(self)
+
+        newAct  = contextMenu.addAction("New")
+        openAct = contextMenu.addAction("Open")
+        quitAct = contextMenu.addAction("Quit")
+
+        action = contextMenu.exec_(self.mapToGlobal(event.pos()))
+        if action == quitAct:
+            print("Start to quit due to quit actions ")
+            self.close()
+            # 实际上是按右键显示这些弹出式菜单
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+
+```
+#
+#  last update on the ContextMenu 
+#
