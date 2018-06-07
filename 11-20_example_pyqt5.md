@@ -200,3 +200,50 @@ sys.exit(App.exec())
 ```
 ##
 #### last update on 2018-06-07 15:35
+
+
+# QLineEdit Example 
+## 
+
+# QLineEdit Example 
+## 要注意中文切换后会导致一些标点符后有问题，因此尽量不要左右切换中英，最好先用英文调试好后再修改！
+```
+
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QWidget,QMessageBox,QLineEdit,QPushButton
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "QLineEdit Example "
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+        self.lineedit = QLineEdit(self)
+        self.lineedit.move(200,200)
+        self.lineedit.resize(280,40)
+        # resize 用于定制尺寸的大小
+
+        self.button = QPushButton("show Text",self)
+        self.button.move(270,250)
+        self.button.clicked.connect(self.onClick)
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def onClick(self):
+        textValue = self.lineedit.text()
+        QMessageBox.question(self,"Line Edit","you have input with message : "+ textValue,QMessageBox.Ok,QMessageBox.Ok)
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+
+
+```
