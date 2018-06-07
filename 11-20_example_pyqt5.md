@@ -142,3 +142,61 @@ sys.exit(App.exec())
 ```
 ##  菜单下面的可以check或者uncheck 
 ### last update on 2018-06-07
+## 
+# 工具条实例
+# 注意工具条中槽函数的实现
+```
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QAction
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 ToolBars "
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+
+        exitAct = QAction(QIcon("Icons/quit.gif"),'Exit',self)
+        exitAct.setShortcut('Ctrl+Q')
+        exitAct.triggered.connect(self.ClossApp)
+        # triggered.connect连接到槽函数 ，让槽函数实现要做的功能
+
+
+        copyAct =  QAction(QIcon("Icons/copy.gif"),'Copy',self)
+        copyAct.setShortcut('Ctrl+C')
+
+        pasteAct = QAction(QIcon("Icons/paste.gif"), 'Paste', self)
+        pasteAct.setShortcut('Ctrl+V')
+
+        deleteAct = QAction(QIcon("Icons/delete.gif"), 'Delete', self)
+        deleteAct.setShortcut('Ctrl+D')
+
+        self.toolbar = self.addToolBar("ToolBar")
+        self.toolbar.addAction(exitAct)
+        self.toolbar.addAction(copyAct)
+        self.toolbar.addAction(pasteAct)
+        self.toolbar.addAction(deleteAct)
+
+
+
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def ClossApp(self):
+        self.close()
+
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+```
+##
+#### last update on 2018-06-07 15:35
