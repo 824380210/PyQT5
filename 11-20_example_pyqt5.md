@@ -91,5 +91,54 @@ sys.exit(App.exec())
 
 ```
 #
-#  last update on the ContextMenu 
+####  last update on the ContextMenu  2018-06-07
 #
+#   QCheckMenu example 
+```
+
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QStatusBar,QPushButton,QWidget,QAction, QMenu, QMenuBar
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "QCheckBar"
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+        self.statusbar = self.statusBar()
+        self.statusbar.showMessage("Message is Ready")
+        # 可以看到状态栏更新上面的消息
+        menubar = self.menuBar()
+        viewMemu = menubar.addMenu("View")
+
+        viewAction = QAction("View Status",self,checkable = True)
+        viewAction.setChecked(True)
+        viewAction.setStatusTip("View StatusBar11111111")
+        viewAction.triggered.connect(self.toggleMenu)
+
+        viewMemu.addAction(viewAction)
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.left,self.top,self.width,self.height)
+        self.show()
+    def toggleMenu(self,state):
+        if state:
+            self.statusbar.show()
+        else:
+            self.statusbar.hide()
+    def AddMessage(self):
+        self.statusBar().showMessage("the button is clicked")
+App =QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+```
+##  菜单下面的可以check或者uncheck 
+### last update on 2018-06-07
