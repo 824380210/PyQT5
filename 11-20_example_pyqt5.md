@@ -247,3 +247,116 @@ sys.exit(App.exec())
 
 
 ```
+##
+##
+##
+#  PyQT5 Example 16  with position ,move functions 
+```
+import sys
+from PyQt5 import QtGui,QtWidgets
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QLabel,QFrame
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "Widgets Positions"
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+        self.label1 = QLabel("<font color=red>定值2</font>",self)
+        self.label1.move(50,50)
+        self.label1.resize(50,50)
+        # self.label1.setStyleSheet("color:red")
+        self.label1.setFrameStyle( QtWidgets.QFrame.Panel|QtWidgets.QFrame.WinPanel)
+        self.label1.setFrameShape(QtWidgets.QFrame.Box)
+
+        self.label2 = QLabel("Please2 ", self)
+        self.label2.move(100, 100)
+        self.label2.resize(50, 50)
+        self.label2.setFrameShape(QtWidgets.QFrame.Box)
+        # some help on the link https://www.jianshu.com/p/70c0fb2e5fc4
+
+
+        self.label3 = QLabel("Please3 ", self)
+        self.label3.move(150, 150)
+        self.label3.resize(50, 50)
+        self.label3.setFrameStyle( QtWidgets.QFrame.Panel|QtWidgets.QFrame.Sunken )
+
+        self.label4 = QLabel("Please 4", self)
+        self.label4.move(200, 200)
+        self.label4.resize(50, 50)
+        self.label4.setFrameStyle(QtWidgets.QFrame.Panel | QtWidgets.QFrame.Raised)
+
+
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+
+
+```
+##
+##
+##
+# PyQT5 Example 17  with Layout and GroupBox 
+```
+
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QDialog,QPushButton,QMessageBox,QVBoxLayout,QHBoxLayout,QGroupBox
+
+class Window(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 Layout Example "
+        self.top =200
+        self.left =200
+        self.width = 300
+        self.height =200
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.HorizontalLayout()
+        vBox =QVBoxLayout()
+        vBox.addWidget(self.gbx)
+        self.setLayout(vBox)
+        self.show()
+    def HorizontalLayout(self):
+        self.gbx = QGroupBox("What is your Favorite Sport?")
+        hbxLayout = QHBoxLayout()
+        btn1 = QPushButton("Football")
+        btn2 = QPushButton("Cricket")
+        btn3 = QPushButton("Tennis")
+
+        hbxLayout.addWidget(btn1)
+        hbxLayout.addWidget(btn2)
+        hbxLayout.addWidget(btn3)
+        self.gbx.setLayout(hbxLayout)
+
+        btn1.clicked.connect(self.btn1Clicked)
+
+    def btn1Clicked(self):
+        QMessageBox.information(self,"Football","Yes, I Like Football")
+
+
+
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+
+```
