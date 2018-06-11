@@ -360,3 +360,56 @@ window = Window()
 sys.exit(App.exec())
 
 ```
+###
+###
+# PyQT5 Example 18  GridBox 
+## 注意容器间的 包含关系，这个要特别注意的地方
+```
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QDialog,QGridLayout,QGroupBox,QPushButton,QVBoxLayout
+
+class Window(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 GridLayout Example "
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+        self.setWindowTitle(self.title)
+
+        self.gridlayoutcreateion()
+        vboxlayout =QVBoxLayout()
+        vboxlayout.addWidget(self.gbx)
+        self.setLayout(vboxlayout)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def gridlayoutcreateion(self):
+        self.gbx = QGroupBox("Grid Layout Example")
+        gridlayout = QGridLayout()
+        gridlayout.addWidget(QPushButton('1'),0,0)
+        gridlayout.addWidget(QPushButton('2'), 0, 1)
+        gridlayout.addWidget(QPushButton('3'), 0, 2)
+
+        gridlayout.addWidget(QPushButton('4'), 1, 0)
+        gridlayout.addWidget(QPushButton('5'), 1, 1)
+        gridlayout.addWidget(QPushButton('6'), 1, 2)
+
+        gridlayout.addWidget(QPushButton('7'), 2, 0)
+        gridlayout.addWidget(QPushButton('8'), 2, 1)
+        gridlayout.addWidget(QPushButton('9'), 2, 2)
+
+        self.gbx.setLayout(gridlayout)
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+
+
+```
