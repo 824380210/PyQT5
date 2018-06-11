@@ -362,7 +362,7 @@ sys.exit(App.exec())
 ```
 ###
 ###
-# PyQT5 Example 18  GridBox 
+# PyQT5 Example 18  Grid Layout 
 ## 注意容器间的 包含关系，这个要特别注意的地方
 ```
 import sys
@@ -413,3 +413,56 @@ sys.exit(App.exec())
 
 
 ```
+#
+#
+# Example of PyQT5 19 QcheckBox 
+### 让QLable和QCheckBox的文本显示全的一个函数 self.label1.adjustSize()
+```
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QLabel,QCheckBox
+from PyQt5.QtCore import Qt
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT 5  QCheckBox Example "
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+        self.checkbox = QCheckBox("Do you like Football? ",self)
+        self.checkbox.move(100,100)
+        # self.checkbox.
+        self.checkbox.toggle()
+        self.checkbox.adjustSize()
+        self.checkbox.stateChanged.connect(self.checkBoxChange)
+
+        self.label1 = QLabel("Hello",self)
+        self.label1.adjustSize()
+        self.label1.move(120,150)
+        self.label1.showNormal()
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def checkBoxChange(self,state):
+        if state == Qt.Checked:
+            self.label1.setText("Yes ,I like FootBall")
+            self.label1.adjustSize()
+        else:
+            self.label1.setText("NO ,I dont like FootBall")
+            self.label1.adjustSize()
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+
+```
+### 在修改了文本后要设置 adjustSize才能会显示全文本内容，否则会有显示问题
+ 
+
