@@ -464,5 +464,50 @@ sys.exit(App.exec())
 
 ```
 ### 在修改了文本后要设置 adjustSize才能会显示全文本内容，否则会有显示问题
- 
+##
+# PyQT5 20 Example SpinBox 
+```
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QSpinBox,QLabel,QVBoxLayout
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 QSpinBox Example "
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+        VBoxLayout = QVBoxLayout()
+        self.label1 = QLabel("Current Value",self)
+        self.label1.adjustSize()
+        #self.label1.setWordWrap(True)
+
+        self.label1.move(60,60)
+        VBoxLayout.addWidget(self.label1)
+
+        self.spinbox = QSpinBox(self)
+        self.spinbox.move(60,10)
+        VBoxLayout.addWidget(self.spinbox)
+        self.spinbox.valueChanged.connect(self.changespinvalue)
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def changespinvalue(self):
+        self.label1.setText("Current Vaule:" +str(self.spinbox.value()))
+        self.label1.adjustSize()
+        # 解决label文本变更后内容显示不全的问题
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+
+
+``` 
 
