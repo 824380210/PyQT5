@@ -493,6 +493,10 @@ class Window(QMainWindow):
 
         self.spinbox = QSpinBox(self)
         self.spinbox.move(60,10)
+        self.spinbox.setMinimum(-10)
+        self.spinbox.setMaximum(20)
+        # 设置最大值，最小值，可以是负数呵！
+        # 如果要设置浮点数，可以用QDoubleSpinBox
         VBoxLayout.addWidget(self.spinbox)
         self.spinbox.valueChanged.connect(self.changespinvalue)
 
