@@ -103,4 +103,52 @@ sys.exit(App.exec())
 ```
 
 
+# PyQT5 Example of QSlider 
+# 使用滑块，当滑块值 变化的时候，切换QLabel不同的图象功能
+```
 
+import sys
+from PyQt5 import QtGui
+from  PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QLabel,QSlider,QWidget
+
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 QSlider Image Example #23 "
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+        self.slider = QSlider(Qt.Horizontal,self)
+        self.slider.setGeometry(60,60,100,20)
+        #self.slider.valueChanged.connect(self.changeValue)
+        self.slider.valueChanged[int].connect(self.changeValue)
+        # [int] 代表是什么呢 ？效果同上面的例子是一样的呵！
+        self.label = QLabel(self)
+        self.label.setPixmap(QPixmap('Icons/save.gif'))
+        self.label.move(100,100)
+
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def changeValue(self,value):
+        if value == 0:
+            self.label.setPixmap(QPixmap('Icons/save.gif'))
+        elif value < 50:
+            self.label.setPixmap(QPixmap('Icons/copy.gif'))
+        else:
+            self.label.setPixmap(QPixmap('Icons/delete.gif'))
+
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+```
