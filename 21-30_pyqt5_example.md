@@ -152,3 +152,81 @@ App = QApplication(sys.argv)
 window = Window()
 sys.exit(App.exec())
 ```
+# PyQT5 Example 24 : QTables
+###
+###
+ 
+```
+
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QWidget,QTableWidget,QTableWidgetItem,QVBoxLayout
+
+class Window(QWidget):
+    """ 如果window不是继承QWidget，而是来自QMainWindow，实际测试的时候会不会显示QTable呵！"""
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 Tables Example #24 "
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.createTables()
+        self.vBoxLayout = QVBoxLayout()
+        self.vBoxLayout.addWidget(self.tablewidget)
+        self.setLayout(self.vBoxLayout)
+        self.show()
+
+    def createTables(self):
+        self.tablewidget = QTableWidget()
+        self.tablewidget.setRowCount(5)
+        #ROW 行
+        self.tablewidget.setColumnCount(3)
+        # column 列
+
+        self.tablewidget.setItem(0,0,QTableWidgetItem("Name"))
+        self.tablewidget.setItem(0, 1, QTableWidgetItem("Email"))
+        self.tablewidget.setItem(0, 2, QTableWidgetItem("Phone Number"))
+        #
+        self.tablewidget.setItem(1,0,QTableWidgetItem("Peter "))
+        self.tablewidget.setItem(1, 1, QTableWidgetItem("Peter@test.com "))
+        self.tablewidget.setItem(1, 2, QTableWidgetItem("086-123456789"))
+        #
+        self.tablewidget.setColumnWidth(1,200)
+        self.tablewidget.setColumnWidth(2, 150)
+        #
+        self.tablewidget.setItem(2,0,QTableWidgetItem("haohao"))
+        self.tablewidget.setItem(2, 1, QTableWidgetItem("haohao@test.com "))
+        self.tablewidget.setItem(2, 2, QTableWidgetItem("086-123489123"))
+        #
+        self.tablewidget.setItem(3,0,QTableWidgetItem("Paul"))
+        self.tablewidget.setItem(3, 1, QTableWidgetItem("paul@test.com "))
+        self.tablewidget.setItem(3, 2, QTableWidgetItem("086-456456456"))
+        #
+        self.tablewidget.setItem(4,0,QTableWidgetItem("John"))
+        self.tablewidget.setItem(4, 1, QTableWidgetItem("john@test.com "))
+        self.tablewidget.setItem(4, 2, QTableWidgetItem("086-123123123"))
+        # 超出的行不会显示 ，如下面的信息
+        self.tablewidget.setItem(5,0,QTableWidgetItem("Tony"))
+        self.tablewidget.setItem(5, 1, QTableWidgetItem("Tony@test.com "))
+        self.tablewidget.setItem(5, 2, QTableWidgetItem("086-234234234"))
+
+
+
+
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+
+```
+##
+##
