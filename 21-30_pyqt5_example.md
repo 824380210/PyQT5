@@ -313,4 +313,61 @@ App = QApplication(sys.argv)
 window = Window()
 sys.exit(App.exec())
 ```
+#
+# PyQT5 Example #27 QColorDialog 
+```
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QFontDialog,QPushButton,QTextEdit,QColorDialog
 
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 Example 27 # Color Dialog"
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+
+        self.button1 = QPushButton("Open FontDialog",self)
+        self.button1.setGeometry(100,100,400,30)
+        self.button1.clicked.connect(self.createFontDialog)
+
+        self.button2 = QPushButton("Open ColorDialog",self)
+        self.button2.setGeometry(100,140,400,30)
+
+        self.textedit = QTextEdit(self)
+        self.textedit.setGeometry(100,180,400,300)
+        self.button2.clicked.connect(self.createColorDialog)
+
+
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def createFontDialog(self):
+        font,ok = QFontDialog.getFont()
+        if ok:
+            self.textedit.setFont(font)
+    def  createColorDialog(self):
+        color = QColorDialog.getColor()
+        self.textedit.setTextColor(color)
+        #  注意要选中文本才能修改文本的色彩呵！
+
+
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+```
+#
+#
+# PyQT5 Example 28 print Dialog 
+```
+
+```
