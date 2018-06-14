@@ -271,3 +271,46 @@ window = Window()
 sys.exit(App.exec())
 ```
 ##   
+# PyQT5 Example 26 : QFontDialog
+```
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QFontDialog,QPushButton,QTextEdit
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 Example 26 # Font Dialog"
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+
+        self.button1 = QPushButton("Open FontDialog",self)
+        self.button1.setGeometry(100,100,400,30)
+        self.button1.clicked.connect(self.creatFontDialog)
+
+        self.textedit = QTextEdit(self)
+        self.textedit.setGeometry(100,150,400,300)
+
+
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def creatFontDialog(self):
+        font,ok = QFontDialog.getFont()
+        if ok:
+            self.textedit.setFont(font)
+
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+```
+
