@@ -229,4 +229,45 @@ sys.exit(App.exec())
 
 ```
 ##
-##
+#  PyQT5 example　#25  of DInputDialog
+#
+```
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QWidget,QInputDialog,QLabel,QPushButton
+
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 Example 25 : InputDialog"
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+
+        self.button1 = QPushButton("Open Dialog",self)
+        self.button1.move(100,100)
+        self.button1.clicked.connect(self.createInputDialog)
+
+        self.label1 = QLabel("Hello",self)
+        self.label1.setGeometry(100,150,300,50)
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def createInputDialog(self):
+        mytext,ok = QInputDialog.getText(self,"Inputdialog","Enter your name")
+        if ok:
+            self.label1.setText(str(mytext))
+    # 注意QInputDialog的返回值 要转换
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+```
+##   
