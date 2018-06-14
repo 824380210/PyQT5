@@ -370,4 +370,52 @@ sys.exit(App.exec())
 # PyQT5 Example 28 print Dialog 
 ```
 
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QPushButton,QTextEdit
+from PyQt5.QtPrintSupport import QPrintDialog,QPrinter
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "xxxx "
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+
+        self.button1 = QPushButton("Print",self)
+        self.button1.setGeometry(50,50,400,30)
+        self.button1.clicked.connect(self.createPrintDialog)
+        # setGeometry 左，上，长，高
+        # 左代表离左边的距离
+        # 上代表离上边的距离
+        self.textedit = QTextEdit(self)
+        self.textedit.setGeometry(50,90,400,300)
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def createPrintDialog(self):
+        printer = QPrinter(QPrinter.HighResolution)
+        dialog = QPrintDialog(printer,self)
+
+        if dialog.exec_() == QPrintDialog.Accepted:
+            self.textedit.print_(printer)
+
+
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+# 实测在win 10  没有问题,这个示例只打印TextEdit中的文本呵！
+
 ```
+#
+#
+
