@@ -417,5 +417,67 @@ sys.exit(App.exec())
 
 ```
 #
-#
+# PyQT5 Example # 29 with printe preview functions
+```
+
+import sys
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QPushButton,QTextEdit
+from PyQt5.QtPrintSupport import QPrintDialog,QPrinter,QPrintPreviewDialog
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "Printer with Preview functions  #29 "
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+
+        self.button1 = QPushButton("Print",self)
+        self.button1.setGeometry(50,50,400,30)
+        self.button1.clicked.connect(self.createPrintDialog)
+        # setGeometry 左，上，长，高
+        # 左代表离左边的距离
+        # 上代表离上边的距离
+        self.button2 = QPushButton("Print Preview",self)
+        self.button2.setGeometry(50,90,400,30)
+        self.button2.clicked.connect(self.createprintpreview)
+
+        self.textedit = QTextEdit(self)
+        self.textedit.setGeometry(50,130,400,300)
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def createPrintDialog(self):
+        printer = QPrinter(QPrinter.HighResolution)
+        dialog = QPrintDialog(printer,self)
+
+        if dialog.exec_() == QPrintDialog.Accepted:
+            self.textedit.print_(printer)
+    def createprintpreview(self):
+        printer = QPrinter(QPrinter.HighResolution)
+        previewDialog  = QPrintPreviewDialog(printer,self)
+        previewDialog.paintRequested.connect(self.printPreview)
+        previewDialog.exec_()
+    def printPreview(self,printer):
+        self.textedit.print_(printer)
+        #这个函数需要提供打印机这个参数
+
+
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+# 实测在win 10  没有问题,这个示例只打印TextEdit中的文本呵！
+
+```
+
+
 
