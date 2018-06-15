@@ -533,4 +533,102 @@ App = QApplication(sys.argv)
 window = Window()
 sys.exit(App.exec())
 ```
+## Exampel 30 故障定位方法 try +  except  ,但现在不清楚是什么问题导致读取有问题
+```
 
+
+``
+penFile(self):
+        filename = QFileDialog.getOpenFileName(self,"Open File")
+        print( filename[0])
+        if filename[0]:
+            f = open(filename[0],'r')
+
+            try:
+                data = f.read()
+            except:
+                print("error with read file ")
+                #mydata = unicode(data,'gb2312','ignore')
+                # print(type(data))
+                # data  have the decode or encode issue when open non utf-8 file 
+                print(data)
+                try:
+                    self.textedit.setText(data.encode())
+                except:
+                    print("error in setText")
+```
+## 手动打开文件，发现了编码问题 
+```
+>>> with open('D:/pyqt5/a/24table.py','r') as f:
+	f.read()
+
+	
+Traceback (most recent call last):
+  File "<pyshell#2>", line 2, in <module>
+    f.read()
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x80 in position 241: illegal multibyte sequence
+>>> 
+
+```
+# Example 31 :加强版
+```
+
+#coding:utf-8
+import sys
+# default_encoding="utf-8"
+# if(default_encoding!=sys.getdefaultencoding()):
+#     reload(sys)
+#     sys.setdefaultencoding(default_encoding)
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QFileDialog,QPushButton,QTextEdit
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 Example #30 File Dialog"
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+
+        self.button  =QPushButton("Open File",self)
+        self.button.setGeometry(50,50,400,30)
+        self.button.clicked.connect(self.openFile)
+
+        self.textedit = QTextEdit(self)
+        self.textedit.setGeometry(50,90,400,300)
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def openFile(self):
+        filename = QFileDialog.getOpenFileName(self,"Open File")
+        print( filename[0])
+        if filename[0]:
+            #f = open(filename[0],encoding='utf-8',errors="ignore")
+            f = open(filename[0],'r',encoding='UTF-8')
+
+            try:
+                data = f.read()
+            except:
+                print("error with read file ")
+                data  = "<b>Problem when read the file content,</b>"
+                #mydata = unicode(data,'gb2312','ignore')
+                # print(type(data))
+                # data  have the decode or encode issue when open non utf-8 file 
+                print(data)
+            try:
+                self.textedit.setText(data)
+            except:
+                print("error in setText")
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+```
+## 上面的例子解决了读取中文编码的问题 
