@@ -479,5 +479,58 @@ sys.exit(App.exec())
 
 ```
 
+# PyQT5 Example #30 openFile Dialog 
+### 打开中文文件的时候有问题，异常退出
+```
+#coding:utf-8
+import sys
+# default_encoding="utf-8"
+# if(default_encoding!=sys.getdefaultencoding()):
+#     reload(sys)
+#     sys.setdefaultencoding(default_encoding)
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow,QApplication,QFileDialog,QPushButton,QTextEdit
 
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQT5 Example #30 File Dialog"
+        self.top =200
+        self.left =200
+        self.width = 600
+        self.height =500
+        # self.InitUI()
+
+        self.InitUI()
+    def InitUI(self):
+
+        self.button  =QPushButton("Open File",self)
+        self.button.setGeometry(50,50,400,30)
+        self.button.clicked.connect(self.openFile)
+
+        self.textedit = QTextEdit(self)
+        self.textedit.setGeometry(50,90,400,300)
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.show()
+    def openFile(self):
+        filename = QFileDialog.getOpenFileName(self,"Open File")
+        print( filename[0])
+        if filename[0]:
+            f = open(filename[0],'r')
+
+            with f:
+                data = f.read()
+                #mydata = unicode(data,'gb2312','ignore')
+                # print(type(data))
+                # data  have the decode or encode issue when open non utf-8 file 
+                print(data)
+                self.textedit.setText(data.encode())
+
+App = QApplication(sys.argv)
+window = Window()
+sys.exit(App.exec())
+```
 
