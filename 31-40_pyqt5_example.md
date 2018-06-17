@@ -211,7 +211,17 @@ class Window(QMainWindow):
         except mdb.Error as e:
             print(str(e))
 
-# 没有对输入进行检查，不清楚是否合规
+# 没有对输入进行检查，不清楚是否合规 ,如果输入中文会失败呵！估计要转换一个，或者数据库不支持
+"""
+
+
+
+before check
+insert into data( name,email,phone) values('宜','好人卡','1231'); 
+
+Process finished with exit code -2147483645
+
+"""
 
 App = QApplication(sys.argv)
 window = Window()
