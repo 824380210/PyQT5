@@ -1,4 +1,4 @@
-mplementation generated from reading ui file 'multiple_thread_start_stop_reset.ui'
+#implementation generated from reading ui file 'multiple_thread_start_stop_reset.ui'
 #
 # Created by: PyQt5 UI code generator 5.8.2
 #
